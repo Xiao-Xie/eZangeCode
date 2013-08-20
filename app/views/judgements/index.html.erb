@@ -1,0 +1,38 @@
+<h1>Listing judgements</h1>
+
+<table>
+  <tr>
+    <th>Member</th>
+    <th>Sin</th>
+    <th>Timestamp</th>
+    <th>Judgement</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @judgements.each do |judgement| %>
+  <tr>
+<% if ! judgement.member_id.nil? %>
+    <% member = Member.find_by_id(judgement.member_id) %>
+    <td><%= member.user_name %></td>
+    <% else %>
+      <td>N/A</td>
+<% end %>
+    <% if ! judgement.sin_id.nil? %>
+    <% sin = Sin.find_by_id(judgement.sin_id) %>
+    <td><%= sin.title %></td>
+    <% else %>
+      <td>N/A</td>
+    <% end %>
+    <td><%= judgement.timestamp %></td>
+    <td><%= judgement.judgement %></td>
+    <td><span class="label"><%= link_to 'Show', judgement %></span></td>
+   </tr>
+
+<% end %>
+</table>
+
+<br />
+
+

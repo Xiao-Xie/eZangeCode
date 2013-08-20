@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User name:</b>
+  <%= @support.user_name %>
+</p>
+
+<p>
+  <b>User email:</b>
+  <%= @support.user_email %>
+</p>
+
+<p>
+  <b>Support request:</b>
+  <%= @support.support_request %>
+</p>
+
+
+<%= link_to 'Edit', edit_support_path(@support) %> |
+<%= link_to 'Back', supports_path %>

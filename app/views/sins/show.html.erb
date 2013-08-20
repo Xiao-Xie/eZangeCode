@@ -1,0 +1,114 @@
+<p id="notice"><%= notice %></p>
+
+<h2>
+  <b>Zange:</b>
+  <%= @sin.title %>
+</h2>
+
+<p>
+  <b>Sin:</b>
+  <div class="alert alert-block">
+  <%= @sin.sin %>
+  </div>
+</p>
+
+<p>
+  <b>Member:</b>
+  <% @member = Member.find_by_id(@sin.member_id) %> 
+  <%= @member.user_name %>
+</p>
+
+
+
+<p>
+  <b>Sin date:</b>
+  <%= @sin.sin_date %>
+</p>
+
+<!--<p>
+  <b>Sin time:</b>
+  <%= @sin.sin_time %>
+</p>-->
+
+<p>
+  <b>Sin Address:</b>
+  <%= @sin.address %>
+</p>
+
+<p>
+  <b>Sin street number:</b>
+  <%= @sin.sin_street_number %>
+</p>
+
+<!--<p>
+  <b>Sin street name:</b>
+  <%= @sin.sin_street_name %>
+</p>
+
+<p>
+  <b>Sin city:</b>
+  <%= @sin.sin_city %>
+</p>
+
+<p>
+  <b>Sin state:</b>
+  <%= @sin.sin_state %>
+</p>
+
+<p>
+  <b>Sin zipcode:</b>
+  <%= @sin.sin_zipcode %>
+</p>
+
+<p>
+  <b>Sin country:</b>
+  <%= @sin.sin_country %>
+</p>-->
+
+
+
+
+<h2> Judgements </h2>
+<% @sin = Sin.find_by_id(params[:id]) %>
+<% @judgements = @sin.judgements %>
+<table>
+  <tr>
+    <th>Judgement</th>
+    <th>Member</th>
+    <th>Timestamp</th>
+    <th></th>
+  </tr>
+
+<% @judgements.each do |judgement| %>
+  <tr>
+    <td><%= judgement.judgement %></td>
+    <% if judgement.member_id = nil? %>
+    <% member = Member.find_by_id(judgement.member_id) %>
+      <td><%= member.user_name %></td>
+    <% end %>
+    <td><%= judgement.timestamp %></td>
+    <td>
+        <% if judgement.member_id == session[:member_id] %>
+          <%= link_to 'Destroy Judgement', [judgement.sin, judgement], :method => :delete, :data => { :confirm => 'Are you sure?'} %>
+        <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+<% render @sin.judgements %>
+
+<% if session[:member_id].nil? %>
+  <h3>Login to post a judgement </h3>
+
+
+<% elsif @sin.member_id != session[:member_id] %>
+  <h2>Add a Judgement:</h2>
+<%= render "judgements/form" %>
+<% end %>
+
+
+<br/>
+<% if @sin.member_id == session[:member_id] %>
+<span class="label"><%= link_to 'Edit', edit_sin_path(@sin) %> </span>
+<% end %>
+<span class="label"><%= link_to 'Back', sins_path %></span>

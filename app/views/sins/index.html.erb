@@ -1,0 +1,54 @@
+<div class="page-header">
+  <h1>Zanges</h1>
+</div>
+
+<div class="row">
+  <div class="span7 offset1"></div>
+</div><br/>
+ 
+  <div class="row">
+    <div class="span5">
+      <div class="alert alert-block">
+        <p>Here's a list of Zanges.</p>    
+      </div>
+    </div>
+  </div>        
+  
+  <div >
+    <%= render :partial => "shared/map", :object => @sins, :as => 'sins' %><br/>
+        <table>
+          <tr>
+            <th>Member</th>
+            <th>Title</th>
+            <th>Sin date</th>
+<!--            <th>Sin city</th>
+            <th>Sin state</th>-->
+            <th>Sin</th>
+          </tr>
+        
+        <% @sins.each do |sin| %>
+          <tr>
+            <% member = Member.find_by_id(sin.member_id) %>
+            <td><%= member.user_name %></td>
+            <td><%= sin.title %></td>
+            <td><%= sin.sin_date %></td>
+<!--            <td><%= sin.sin_city %></td>
+            <td><%= sin.sin_state %></td>-->
+            <td><%= sin.sin %></td>
+            <td><span class="label"><%= link_to 'Show', sin %></span></td>
+          <% if member.id == session[:member_id] %>
+            <td><span class="label"><%= link_to 'Edit', edit_sin_path(sin) %></span></td>
+            <td><span class="label"><%= link_to 'Destroy', sin, method: :delete, data: { confirm: 'Are you sure?' } %></span></td>
+          <% end %>
+          </tr>
+        <% end %>
+        </table>
+        <br />
+  </div>
+
+    <p><span class="label"><%= link_to 'Post a Zange', new_sin_path %></span></p>
+
+    <p><span class="label label-success">Most Popular Zanges</span></p>
+
+    <p><span class="label label-important">NSFW Zanges</span></p>
+

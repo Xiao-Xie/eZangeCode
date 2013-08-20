@@ -1,0 +1,79 @@
+<%= form_for(@sin) do |f| %>
+  <% if @sin.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sin.errors.count, "error") %> prohibited this sin from being saved:</h2>
+
+      <ul>
+      <% @sin.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <% member = Member.find_by_id(session[:member_id]) %>
+    <label> User Name: <%= member.user_name %> </label>
+    <%= f.hidden_field :member_id, :value => member.id %>
+  </div>
+  <div class="field">
+    <label class="control-label" for="Title">Zange Title - give us a brief description of your Zange</label>
+    <%= f.text_field :title %>
+  </div>
+  
+  <div class="field">
+    <label class="control-label" for="textarea">Zange - what happened? Did you cheat on your taxes? Skip school? Or...O..MY ..GOD..!!! Tell the world!</label>
+    <%= f.text_area :sin, :rows => 7, :style => "width:650px;"  %>
+  </div>
+  
+  <div class="field">
+    <label class="control-label" for="textarea">Address</label>
+    <%= f.text_area :address, :rows => 2, :style => "width:650px;"  %>
+  </div>
+  
+    <div class="field">
+    <label class="control-label" for="textarea">Weight: How serious do you think your zange is? From 1 to 10</label>
+    <%= f.text_field :weight %>
+  </div>
+  
+<!--  <div class="field">
+    <label class="control-label" for="ZangeCountry">In what country did this take place?</label>
+    <%= f.text_field :sin_country %>
+  </div>-->
+  <div class="field">
+    <%= f.label :date %>
+    <%= f.date_select :sin_date %>
+  </div>
+  <!--    <div class="field">
+    <%= f.label :time %>
+    <%= f.time_select :sin_time %>
+  </div>-->
+<!--  <p><span class="label label-info">If you're located outside the USA, just fill in what you can from here down.</span></p>
+  <div class="field">
+    <%= f.label :street_number %>
+    <%= f.number_field :sin_street_number %>
+  </div>
+  <div class="field">
+    <%= f.label :street_name %>
+    <%= f.text_field :sin_street_name %>
+  </div>
+  <div class="field">
+    <%= f.label :city %>
+    <%= f.text_field :sin_city %>
+  </div>
+  <div class="field">
+    <%= f.label :state %>
+    <%= f.text_field :sin_state %>
+  </div>
+  <div class="field">
+    <label class="control-label" for="ZangeZip">Zip (use 99999 if outside USA)</lable><br/>
+    <%= f.number_field :sin_zipcode %>
+  </div>-->
+
+  <div class="actions">
+   <%= f.submit :submit %> <button type="reset"
+class="btn btn-small">Reset</button></div>
+
+
+ </div> 
+<% end %>

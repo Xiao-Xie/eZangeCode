@@ -1,0 +1,25 @@
+<%= form_for([@sin, @sin.judgements.build]) do |f| %>
+
+
+  <div class="field">
+    <% member = Member.find_by_id(session[:member_id]) %>
+    <%= f.hidden_field :member_id, :value => session[:member_id] %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :sin_id, :value => params[:id] %>
+  </div>
+
+
+<div class="field">
+    <%= f.label :timestamp %><br />
+    <%= f.datetime_select :timestamp %>
+  </div>
+  <div class="field">
+    <%= f.label :judgement %><br />
+    <%= f.text_area :judgement, :rows => 6, :style => "width:650px;"%>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

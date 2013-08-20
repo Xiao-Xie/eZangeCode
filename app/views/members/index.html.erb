@@ -1,0 +1,46 @@
+<title> eZange : Members </title>
+<div class="page-header">
+  <h1>Memebrs of eZange</h1>
+</div>
+
+<div class="row">
+  <div class="span7 offset1"></div>
+</div><br/>
+ 
+  <div class="row">
+    <div class="span5">
+      <div class="alert alert-block">
+        <p>Here's a list of eZange members.</p>    
+      </div>
+    </div>
+  </div>        
+<table>
+  <tr>
+    <th>Member ID</th>
+    <th>User name</th>
+    <th>Religon</th>
+    <th>Zange</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @members.each do |member| %>
+  <tr>
+    <td><%= member.id %></td>
+    <td><%= member.user_name %></td>
+    <td><%= member.religon %></td>
+    <td><p>I want to <b>ZANGE</b> that...</p></td>
+    <td><%= member.number_of_children %></td>
+    <td><span class="label"><%= link_to 'Show', member %></span></td>
+    <% if member.id == session[:member_id] %>
+    <td><span class="label"><%= link_to 'Edit', edit_member_path(member) %></span></td>
+    <td><span class="label"><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></span></td>
+  <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<span class="label"><%= link_to 'New Member', new_member_path %></span>
